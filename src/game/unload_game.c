@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unload_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:29:38 by antheven          #+#    #+#             */
-/*   Updated: 2023/12/20 08:36:14 by antheven         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:54:20 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	unload_game(t_display *display)
 {
 	if (display->level.loaded)
 		unload_level(display);
+	mlx_destroy_window(display->ptr, display->win.ptr);
+	mlx_destroy_image(display->ptr, display->win.buffer.ptr);
 	mlx_destroy_display(display->ptr);
 	free(display->ptr);
 }

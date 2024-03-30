@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:58:21 by coltcivers        #+#    #+#             */
-/*   Updated: 2024/03/20 00:58:37 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/30 15:02:00 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ struct s_render
 };
 
 int		operate_raycast(t_game *game);
-t_dda	dda_ray(t_game *game, t_point plane, t_point dir_vector, int ray);
+int		dda_ray(t_game *game, t_point plane, t_point dir_vector, int ray);
 void	render_ray(t_game *game, t_dda *dda, int ray, t_point ray_dir);
 
 #endif

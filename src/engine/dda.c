@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 23:32:07 by coltcivers        #+#    #+#             */
-/*   Updated: 2024/03/21 15:19:23 by antheven         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:54:41 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	dda_loop(t_game *game, t_dda *dda, int completion,
 	}
 }
 
-t_dda	dda_ray(t_game *game, t_point plane, \
+int	dda_ray(t_game *game, t_point plane, \
 	t_point dir_vector, int ray)
 {
 	t_dda			*dda;
@@ -81,6 +81,8 @@ t_dda	dda_ray(t_game *game, t_point plane, \
 	completion = 0;
 	max_iter = 200;
 	dda = ft_calloc(1, sizeof(*dda));
+	if (dda == NULL)
+		return (1);
 	camera = 2 * ray / game->display.win.size[WIDTH] - 1;
 	ray_dir.x = dir_vector.x + plane.x * camera;
 	ray_dir.y = dir_vector.y + plane.y * camera;
@@ -89,5 +91,6 @@ t_dda	dda_ray(t_game *game, t_point plane, \
 	compute_delta_dist(dda, ray_dir);
 	dda_loop(game, dda, completion, max_iter);
 	render_ray(game, dda, ray, ray_dir);
-	return (*dda);
+	free(dda);
+	return (0);
 }

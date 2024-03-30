@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:19:10 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/26 13:43:43 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/30 15:46:39 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static int	exit_game(t_game *game)
+int	exit_game(t_game *game)
 {
 	printf("entered exit game \n");
 	unload_game(&game->display);

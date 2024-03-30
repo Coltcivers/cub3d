@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:07:55 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/26 13:09:27 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/30 16:03:30 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ void	draw_minimap(t_game *game);
 void	handle_right(t_game *game);
 void	handle_left(t_game *game);
 void	handle_esc(t_game *game);
+int		exit_game(t_game *game);
+void	loop_helper(t_game *game, int keycode);
 
 #endif
