@@ -27,17 +27,17 @@ NB := $(words $(SRCS))
 CUR = 0
 SRC=$(addsuffix .c, $(addprefix src/, $(addprefix ,$(SRCS))))
 OBJ=$(SRC:.c=.o)
-FLAGS=-Wall -Wextra -I inc -L libs/libft -L libs/minilibx-linux -lft -lmlx -lX11 -lXext -g3 -lm# -Werror
+FLAGS=-Wall -Wextra -Werror -I inc -L libs/libft -L libs/minilibx-linux -lft -lmlx -lX11 -lXext -g3 -lm
 NAME=cub3d
 
 all: mlx libft $(NAME)
 
 $(NAME): $(OBJ)
-	@gcc -o $(NAME) $(OBJ) $(FLAGS)
+	@cc -o $(NAME) $(OBJ) $(FLAGS)
 	@/bin/echo -e "\nBuilding binary [$(NAME)]"
 
 .c.o:
-	@gcc -fPIC -c $< -o $@ $(FLAGS)
+	@cc -fPIC -c $< -o $@ $(FLAGS)
 	$(eval CUR=$(shell echo $$(($(CUR)+1))))
 	@/bin/echo -ne "Compiling sources [$(shell echo "$(CUR)*100/$(NB)" | bc)%] $@            \r"
 

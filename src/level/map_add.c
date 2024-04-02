@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 22:23:56 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/26 12:55:27 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/31 19:09:04 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ int	map_add(t_lvl *level, int i, char *line)
 	char	**map_swap;
 	int		j;
 
-	j = 0;
+	j = -1;
 	map_swap = level->map;
 	level->map = ft_calloc(i + 1, sizeof(line));
+	if (level->map == NULL)
+		return (1);
 	ft_memmove(level->map, map_swap, (i) * sizeof(line));
 	if (line)
 	{
-		while (line[j])
+		while (line[j++])
 		{
 			if (ft_isspace(line[j]))
 				line[j] = 'X';
-			j++;
 		}
 	}
 	level->map[i] = line;

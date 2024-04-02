@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:39:19 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/22 15:41:57 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/31 18:52:45 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		load_level(t_lvl *level, char *level_file);
 int		parse_map(t_lvl *level, char *line);
 void	print_level(t_lvl *level);
 int		map_add(t_lvl *level, int i, char *line);
-void	fit_level(t_lvl *level);
+int		fit_level(t_lvl *level);
 int		check_map(t_lvl *level);
 
 #endif

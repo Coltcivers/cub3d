@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:53:54 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/22 15:51:59 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/31 18:53:04 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	load_level(t_lvl *level, char *level_file)
 			if (parse_map(level, line))
 				break ;
 	}
-	fit_level(level);
+	if (fit_level(level))
+		return (1);
 	return (0);
 }

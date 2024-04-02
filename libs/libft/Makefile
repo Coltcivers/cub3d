@@ -18,7 +18,7 @@ $(NAME): $(OBJ)
 	@/bin/echo -e "\nBuilding library [$(NAME)]"
 
 .c.o:
-	@gcc -fPIC -c $< -o $@ $(FLAGS)
+	@cc -fPIC -c $< -o $@ $(FLAGS)
 	$(eval CUR=$(shell echo $$(($(CUR)+1))))
 	@/bin/echo -ne "Compiling sources [$(shell echo "$(CUR)*100/$(NB)" | bc)%] $@            \r"
 

@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 08:25:12 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/22 15:46:09 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/03/31 19:03:40 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	feed_level(t_display *display, char *level_file)
 	}
 	load_level(&display->level, level_file);
 	print_level(&display->level);
-	load_textures(display);
+	if (load_textures(display))
+		return (1);
 	display->level.loaded = 1;
 	if (check_map(&display->level))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fit_level.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:35:57 by antheven          #+#    #+#             */
-/*   Updated: 2023/12/19 22:53:37 by antheven         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:52:36 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "level.h"
 #include <stdio.h>
 
-void	fit_level(t_lvl *level)
+int	fit_level(t_lvl *level)
 {
 	int		i;
 	int		j;
@@ -26,6 +26,8 @@ void	fit_level(t_lvl *level)
 		if (ft_strlen(level->map[i]) != (size_t)level->map_width)
 		{
 			line = ft_calloc(level->map_width + 1, sizeof(char));
+			if (line == NULL)
+				return (1);
 			ft_memmove(line, level->map[i], ft_strlen(level->map[i]));
 			j = ft_strlen(level->map[i]) - 1;
 			while (j < level->map_width - 1)
@@ -36,4 +38,5 @@ void	fit_level(t_lvl *level)
 		}
 		i++;
 	}
+	return (0);
 }

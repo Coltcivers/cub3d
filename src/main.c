@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:19:10 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/30 15:46:39 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/02 16:17:14 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (1);
 	game.display.ptr = mlx_init();
-	new_window(&game.display);
+	if (new_window(&game.display))
+		return (1);
 	mlx_string_put(game.display.ptr, game.display.win.ptr, 106, 106, 0x0,
 		"Loading game...");
 	if (feed_level(&game.display, argv[1]))
