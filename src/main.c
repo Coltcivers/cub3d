@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:19:10 by antheven          #+#    #+#             */
-/*   Updated: 2024/04/02 16:17:14 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/02 16:33:30 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 int	exit_game(t_game *game)
 {
-	printf("entered exit game \n");
 	unload_game(&game->display);
 	exit(EXIT_SUCCESS);
 }
@@ -33,22 +32,21 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (1);
 	game.display.ptr = mlx_init();
+	if (game.display.ptr == NULL)
+		return (1);
 	if (new_window(&game.display))
 		return (1);
-	mlx_string_put(game.display.ptr, game.display.win.ptr, 106, 106, 0x0,
-		"Loading game...");
 	if (feed_level(&game.display, argv[1]))
 	{
 		unload_game(&game.display);
 		return (1);
 	}
-	printf("initial dir : %d \n", game.display.level.initial_direction);
 	game.player.direction = game.display.level.initial_direction;
 	register_events(&game);
 	mlx_clear_window(game.display.ptr, game.display.win.ptr);
 	mlx_hook(game.display.win.ptr, 17, 1L << 0, exit_game, &game);
-	mlx_loop_hook(game.display.ptr, loop, &game);
 	load_game(&game);
+	mlx_loop_hook(game.display.ptr, loop, &game);
 	mlx_loop(game.display.ptr);
 	unload_game(&game.display);
 	return (0);
