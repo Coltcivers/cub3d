@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 23:32:23 by coltcivers        #+#    #+#             */
-/*   Updated: 2024/03/26 13:13:53 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/04 20:09:01 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ static int	render_ray_helper_2(t_game *game,
 	tex_pos
 		= (renderer.draw_start - game->display.win.size[HEIGHT]
 			/ 2 + renderer.line_height / 2)
-		* 1.0 * game->display.level.textures[0].image.size[HEIGHT]
+		* 1.0 * game->display.level.textures[renderer.color].image.size[HEIGHT]
 		/ renderer.line_height;
 	while (i < renderer.draw_end)
 	{
-		tex_pos += 1.0 * game->display.level.textures[0].image.size[HEIGHT]
+		tex_pos += 1.0 * game->display.level.textures
+		[renderer.color].image.size[HEIGHT]
 			/ renderer.line_height;
 		pixel_put(&game->display.win.buffer, renderer.ray, i,
-			get_pixel_color(game->display.level.textures[0].image,
-				(int)(wall_x * (double)(game->display.level.textures[0]
+			get_pixel_color(game->display.level.textures[renderer.color].image,
+				(int)(wall_x * (double)(game->display.level.textures
+					[renderer.color]
 						.image.size[WIDTH])),
-				(int)tex_pos & ((int)game->display.level.textures[0]
+				(int)tex_pos & ((int)game->display.level.textures
+				[renderer.color]
 					.image.size[HEIGHT] - 1)));
 		i++;
 	}
@@ -88,6 +91,7 @@ void	render_ray(t_game *game, t_dda *dda, int ray, t_point ray_dir)
 	renderer.draw_start = 0;
 	renderer.line_height = 0;
 	renderer.ray = ray;
+	renderer.color = get_texture_index(dda, ray_dir);
 	if (dda->side == 0)
 		dda->distance = dda->side_dist.x - dda->delta_dist.x;
 	else
