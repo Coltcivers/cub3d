@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:30:28 by coltcivers        #+#    #+#             */
-/*   Updated: 2024/03/30 15:00:51 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/03 18:38:59 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,22 @@ int	operate_raycast(t_game *game)
 		curr_ray++;
 	}
 	return (0);
+}
+
+int	get_texture_index(t_dda *dda, t_point ray)
+{
+	if (dda->side == 0)
+	{
+		if (ray.x < 0)
+			return (WE);
+		else
+			return (EA);
+	}
+	else
+	{
+		if (ray.y > 0)
+			return (SO);
+		else
+			return (NO);
+	}
 }
