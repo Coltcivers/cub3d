@@ -3,41 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
+/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 09:09:23 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/20 00:57:04 by coltcivers       ###   ########.fr       */
+/*   Created: 2022/11/25 18:54:10 by hgirard           #+#    #+#             */
+/*   Updated: 2024/04/05 15:22:09 by antheven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+#define BUFFER_SIZE	1024
+
+char	*read_buffer(int fd, char *buffer)
+{
+	char	*temp;
+	int		n;
+
+	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!temp)
+		return (0);
+	n = 1;
+	while (!ft_strchr(buffer, '\n') && n != 0)
+	{
+		n = read(fd, temp, BUFFER_SIZE);
+		if (n == -1)
+		{
+			free(temp);
+			return (0);
+		}
+		temp[n] = '\0';
+		buffer = ft_strjoin(buffer, temp);
+	}
+	free(temp);
+	return (buffer);
+}
+
+char	*get_line(char *buffer)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (!buffer[i])
+		return (0);
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	line = (char *)malloc(sizeof(char) * (i + 2));
+	if (!line)
+		return (0);
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[i] == '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char	*trim_buffer(char *buffer)
+{
+	int		i;
+	int		j;
+	char	*trim;
+
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
+	{
+		free(buffer);
+		return (0);
+	}
+	trim = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
+	if (!trim)
+		return (0);
+	i++;
+	j = 0;
+	while (buffer[i])
+		trim[j++] = buffer[i++];
+	trim[j] = '\0';
+	free(buffer);
+	return (trim);
+}
 
 char	*ft_readline(int fd)
 {
-	char	*buffer;
-	char	*cache;
-	char	*swap;
-	int		i;
+	char		*line;
+	static char	*buffer;
 
-	i = 1;
-	buffer = ft_calloc(1, 2);
-	cache = ft_calloc(1, 1);
-	while (i > 0)
-	{
-		i = read(fd, buffer, 1);
-		if (*buffer == '\n')
-			break ;
-		if (i <= 0)
-		{
-			free(buffer);
-			free(cache);
-			return (NULL);
-		}
-		swap = ft_strjoin(cache, buffer);
-		free(cache);
-		cache = swap;
-	}
-	free(buffer);
-	return (cache);
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
+		return (0);
+	buffer = read_buffer(fd, buffer);
+	if (!buffer)
+		return (0);
+	line = get_line(buffer);
+	buffer = trim_buffer(buffer);
+	if (ft_strchr(line, '\n'))
+		*ft_strchr(line, '\n') = '\0';
+	return (line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_level.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
+/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:53:54 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/31 18:53:04 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/04 23:43:36 by antheven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ int	load_level(t_lvl *level, char *level_file)
 		line = ft_readline(level->fd);
 		if (!line)
 			break ;
-		if (check_lvl_arg(level, line))
-			if (parse_map(level, line))
-				break ;
+		if (ft_strlen(line) > 1)
+			if (check_lvl_arg(level, line))
+				if (parse_map(level, line))
+					break ;
 	}
 	if (fit_level(level))
 		return (1);
