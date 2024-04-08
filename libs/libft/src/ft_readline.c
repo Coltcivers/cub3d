@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:54:10 by hgirard           #+#    #+#             */
-/*   Updated: 2024/04/08 16:41:45 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/09 00:41:11 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ char	*read_buffer(int fd, char *buffer)
 		{
 			free(temp);
 			return (0);
+		}
+		if (n == 0)
+		{
+			free(temp);
+			return (buffer);
 		}
 		temp[n] = '\0';
 		buffer = ft_strjoin(buffer, temp);
@@ -88,11 +93,11 @@ char	*trim_buffer(char *buffer)
 	if (!buffer[i] || (strlen2(buffer) - i) == 1)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
 	trim = malloc(sizeof(char) * (strlen2(buffer) - i));
 	if (!trim)
-		return (0);
+		return (NULL);
 	i++;
 	j = 0;
 	while (buffer[i])
