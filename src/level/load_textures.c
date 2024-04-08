@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:12:29 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/31 19:03:13 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/07 02:51:50 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,23 @@ static int	load_image(t_display *display, t_tex_type tex)
 int	load_textures(t_display *display)
 {
 	t_tex_type	tex;
-	t_lvl		*level;
+	int			test;
 
-	level = &display->level;
 	tex = TEX_NB;
+	test = 0;
+	while (test < TEX_NB)
+	{
+		(&display->level)->textures[test].image.ptr = NULL;
+		test++;
+	}
 	while (tex-- > 0)
 	{
-		if (level->textures[tex].image.type == IMAGE)
+		if ((&display->level)->textures[tex].image.type == IMAGE)
 		{
 			if (load_image(display, tex))
 				return (1);
 		}
-		if (level->textures[tex].image.type == COLOR)
+		if ((&display->level)->textures[tex].image.type == COLOR)
 		{
 			if (load_argb(display, tex))
 				return (1);

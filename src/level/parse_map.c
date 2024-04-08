@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:39:59 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/31 19:06:11 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/08 12:53:22 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	parse_map(t_lvl *level, char *line)
 	if (level->map == NULL)
 		return (1);
 	level->map[i++] = line;
-	while (!map_add(level, i++, ft_readline(level->fd)))
+	while (!map_add(level, i++, ft_readline(level->fd), 0))
 		;
-	map_add(level, i, 0);
+	map_add(level, i, 0, 0);
 	level->map_length = i;
 	return (2);
 }
