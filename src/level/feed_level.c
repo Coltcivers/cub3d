@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 08:25:12 by antheven          #+#    #+#             */
-/*   Updated: 2024/04/08 16:50:13 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/08 18:20:56 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	feed_level(t_display *display, char *level_file)
 	int	level_file_size;
 
 	display->level.loaded = 0;
+	display->level.fd = 0;
 	level_file_size = ft_strlen(level_file);
 	if (ft_strncmp((level_file + level_file_size - 5), ".cub", 4))
 	{
