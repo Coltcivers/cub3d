@@ -79,7 +79,7 @@ char	*trim_buffer(char *buffer)
 		free(buffer);
 		return (0);
 	}
-	trim = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
+	trim = malloc(sizeof(char) * (strlen2(buffer) - i + 1));
 	if (!trim)
 		return (0);
 	i++;
