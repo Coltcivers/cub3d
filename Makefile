@@ -38,7 +38,7 @@ $(NAME): $(OBJ)
 	@/bin/echo -e "\nBuilding binary [$(NAME)]"
 
 .c.o:
-	@cc -fPIC -c $< -o $@ $(FLAGS)
+	@cc -fPIC -c $< -o $@ -I inc -g3
 	$(eval CUR=$(shell echo $$(($(CUR)+1))))
 	@/bin/echo -ne "Compiling sources [$(shell echo "$(CUR)*100/$(NB)" | bc)%] $@            \r"
 

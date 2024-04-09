@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_level.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:53:54 by antheven          #+#    #+#             */
-/*   Updated: 2024/04/04 23:43:36 by antheven         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:51:11 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_lvl_arg(t_lvl *level, char *line)
 	t_tex_type	tex_type;
 
 	if (!(ft_strlen(line) && ft_strchr(line, ' ') && *line != ' '))
-		return (1);
+		return (2);
 	args = ft_split(line, ' ');
 	free(line);
 	tex_type = get_token_type(args[0]);
@@ -62,23 +62,21 @@ int	load_level(t_lvl *level, char *level_file)
 {
 	char	*line;
 
-	level->fd = open(level_file, O_RDONLY);
-	level->map_width = 0;
-	if (level->fd < 0)
-	{
-		perror("open()");
-		return (1);
-	}
 	line = (char *)1;
+	level->map_width = 0;
 	while (line)
 	{
 		line = ft_readline(level->fd);
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 1)
+		{
 			if (check_lvl_arg(level, line))
 				if (parse_map(level, line))
 					break ;
+		}
+		else
+			free(line);
 	}
 	if (fit_level(level))
 		return (1);

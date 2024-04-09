@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:54:10 by hgirard           #+#    #+#             */
-/*   Updated: 2024/04/05 15:22:09 by antheven         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:41:11 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 #define BUFFER_SIZE	1024
 
 char	*read_buffer(int fd, char *buffer)
@@ -29,6 +30,11 @@ char	*read_buffer(int fd, char *buffer)
 		{
 			free(temp);
 			return (0);
+		}
+		if (n == 0)
+		{
+			free(temp);
+			return (buffer);
 		}
 		temp[n] = '\0';
 		buffer = ft_strjoin(buffer, temp);
@@ -65,6 +71,16 @@ char	*get_line(char *buffer)
 	return (line);
 }
 
+static size_t	strlen2(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
 char	*trim_buffer(char *buffer)
 {
 	int		i;
@@ -74,14 +90,14 @@ char	*trim_buffer(char *buffer)
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!buffer[i] || (strlen2(buffer) - i) == 1)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
-	trim = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
+	trim = malloc(sizeof(char) * (strlen2(buffer) - i));
 	if (!trim)
-		return (0);
+		return (NULL);
 	i++;
 	j = 0;
 	while (buffer[i])

@@ -6,7 +6,7 @@
 /*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 22:23:56 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/31 19:09:04 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/09 00:41:40 by coltcivers       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ static void	check_for_player(t_lvl *level, char *line, int i)
 	}
 }
 
-int	map_add(t_lvl *level, int i, char *line)
+int	map_add(t_lvl *level, int i, char *line, int j)
 {
 	char	**map_swap;
-	int		j;
 
-	j = -1;
+	j = 0;
 	map_swap = level->map;
 	level->map = ft_calloc(i + 1, sizeof(line));
 	if (level->map == NULL)
@@ -55,10 +54,11 @@ int	map_add(t_lvl *level, int i, char *line)
 	ft_memmove(level->map, map_swap, (i) * sizeof(line));
 	if (line)
 	{
-		while (line[j++])
+		while (line[j])
 		{
 			if (ft_isspace(line[j]))
 				line[j] = 'X';
+			j++;
 		}
 	}
 	level->map[i] = line;
