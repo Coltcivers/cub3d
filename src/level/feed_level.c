@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   feed_level.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
+/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 08:25:12 by antheven          #+#    #+#             */
-/*   Updated: 2024/04/02 16:50:12 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/08 09:54:34 by antheven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	feed_level(t_display *display, char *level_file)
 		return (1);
 	print_level(&display->level);
 	if (load_textures(display))
+	{
+		printf("Error while loading textures\n");
 		return (1);
+	}
 	display->level.loaded = 1;
 	if (check_map(&display->level))
 	{

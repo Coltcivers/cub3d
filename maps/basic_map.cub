@@ -1,6 +1,8 @@
 NO ./textures/stone.xpm
 SO ./textures/wall.xpm 
+
 WE ./textures/bricked_wood.xpm 
+
 EA ./textures/metal.xpm 
 F 220,100,0
 C 225,30,0

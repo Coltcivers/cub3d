@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
+/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:12:29 by antheven          #+#    #+#             */
-/*   Updated: 2024/03/31 19:03:13 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/06 05:24:44 by antheven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "level.h"
 #include "images.h"
+#include "utils.h"
 #include "mlx.h"
 #include <stdio.h>
 
@@ -24,7 +25,7 @@ static int	load_argb(t_display *display, t_tex_type tex)
 
 	level = &(display)->level;
 	color = ft_split(level->textures[tex].path, ',');
-	if (!color)
+	if (!color || ft_table_count(color) != 3)
 		return (1);
 	level->textures[tex].image.color[A] = 255;
 	level->textures[tex].image.color[R] = ft_atoi(color[0]);

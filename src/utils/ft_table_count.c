@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_table_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 08:39:46 by antheven          #+#    #+#             */
-/*   Updated: 2024/04/06 05:25:05 by antheven         ###   ########.fr       */
+/*   Created: 2024/04/06 05:17:31 by antheven          #+#    #+#             */
+/*   Updated: 2024/04/06 05:19:44 by antheven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+int	ft_table_count(char **table)
+{
+	int	i;
 
-double	deg_to_rad(double d);
-void	draw_circle(t_image *image, t_point pos, int r, int color);
-int		ft_table_count(char **table);
-
-#endif
+	i = 0;
+	while (*table)
+	{
+		i++;
+		table++;
+	}
+	return (i);
+}

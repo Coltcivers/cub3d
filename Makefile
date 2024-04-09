@@ -1,5 +1,6 @@
 SRCS=main \
 utils/deg_to_rad \
+utils/ft_table_count \
 level/feed_level \
 level/load_level \
 level/fit_level \
