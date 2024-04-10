@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   level.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coltcivers <coltcivers@student.42.fr>      +#+  +:+       +#+        */
+/*   By: antheven <antheven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:39:19 by antheven          #+#    #+#             */
-/*   Updated: 2024/04/07 01:12:14 by coltcivers       ###   ########.fr       */
+/*   Updated: 2024/04/10 10:28:42 by antheven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ struct s_tex
 	char		*prefix;
 	char		*path;
 	t_image		image;
+	int			loaded;
 };
 
 struct s_point
